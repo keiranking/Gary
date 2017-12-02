@@ -15,15 +15,56 @@
 
 // let count;
 // let counter;
-const START_TIME = 180;
+const DEFAULT_START_TIME = 180;
+const DEFAULT_CATEGORY_NUMBER = 12;
 const ALPHABET = "ABCDEFGHIJKLMNOPRSTW";
 let audio = document.getElementById("audio");
 const CATEGORIES = [
+  "A boy's name",
+  "Jamaican towns/cities",
+  "Things that are cold",
+  "School supplies",
+  "Pro sports teams",
+  "Insects",
+  "Breakfast foods",
+  "Furniture",
+  "TV shows",
+  "Things found in the ocean",
+  "Jamaican personalities",
+  "Product names",
+
+  "Vegetables",
+  "States",
+  "Things you throw away",
+  "Occupations",
+  "Appliances",
+  "Cartoon characters",
+  "Types of drink",
+  "Musical groups",
+  "Store names",
+  "Things at a cricket game",
+  "Trees",
+  "Personality traits",
+
+  "Articles of clothing",
+  "Desserts",
+  "Car parts",
+  "Things found on a map",
+  "Athletes",
+  "4-letter words",
+  "Items in a refrigerator",
+  "Farm animals",
+  "Street names",
   "Things at the beach",
-  "Jamaican towns and cities",
-  "Items in a fridge",
-  "Types of drinks",
-  "Foreign cities"
+  "Colors",
+  "Tools",
+
+  "Things at a basketball game",
+  "Things at a football game",
+  "3-letter words",
+  "9-letter words",
+  "Wild animals",
+  "American cities"
 ];
 
 Number.prototype.toTimeString = function() {
@@ -39,16 +80,15 @@ String.prototype.random = function() { // returns random character
 }
 
 Array.prototype.pluck = function() { // returns random item, which is deleted from array
-  console.log(this.length);
   const index = Math.floor(Math.random() * this.length);
-  console.log(index);
+  console.log("Plucked item", index, "of", this.length);
   const selection = this[index];
-  delete this[index];
+  this.splice(index, 1);
   return selection;
 }
 
 class Countdown {
-  constructor(time = START_TIME) {
+  constructor(time = DEFAULT_START_TIME) {
     this.time = time;
     this.counter;
     console.log("Created " + this.time + "s countdown.");
@@ -56,7 +96,7 @@ class Countdown {
 
   start() {
     clearInterval(this.counter);
-    // this.time = START_TIME;
+    // this.time = DEFAULT_START_TIME;
     console.log("alpha", this.time, this.counter);
     this.counter = setInterval(this.timer, 1000);
     console.log("bravo", this.time, this.counter);
@@ -88,7 +128,7 @@ class Categories {
     this.all = CATEGORIES;
   }
 
-  select(n = 12) {
+  select(n = DEFAULT_CATEGORY_NUMBER) {
     if (n > this.all.length) {
       n = this.all.length;
     }
@@ -100,10 +140,23 @@ class Categories {
     // console.log("Categories:", list);
     return list;
   }
+
+  publish(n = DEFAULT_CATEGORY_NUMBER) {
+    let catDiv = document.getElementById("categories");
+    catDiv.innerHTML = "";
+    const cats = this.select(n);
+    let ol = document.createElement("OL");
+    for(let i = 0; i < n; i++) {
+      let li = document.createElement("LI");
+      li.innerHTML = cats[i];
+      ol.appendChild(li);
+    }
+    catDiv.appendChild(ol);
+  }
 }
 
 l = new Categories();
-console.log(l.select(2));
+l.publish();
 
 // function start() {
 //   clearInterval(counter);

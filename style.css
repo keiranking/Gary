@@ -8,16 +8,26 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica", "Roboto", "Droid Sans", "Arial", sans-serif;
   margin: 5px;
-  text-align: center;
 }
 
 #categories {
   float: left;
-  margin: 20px;
-  border: 1px solid red;
+  margin: 0 30px;
+  /*border: 1px solid red;*/
+}
+
+#categories ol {
+  list-style-position: inside;
+}
+
+#categories li {
+  font-size: 22pt;
+  padding: 7px;
+  border-bottom: 1px solid var(--med-grey);
 }
 
 #letter {
+  text-align: center;
   font-size: 400pt;
   font-weight: 300;
   margin: 0;
@@ -32,6 +42,7 @@ body {
 }
 
 #timer {
+  text-align: center;
   font-size: 150pt;
   font-weight: 500;
   margin: 0;
