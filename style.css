@@ -1,0 +1,41 @@
+:root {
+  --black: black;
+  --lt-grey: #f8f8f8;
+  --med-grey: #999;
+  --dk-grey: #444;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica", "Roboto", "Droid Sans", "Arial", sans-serif;
+  margin: 5px;
+  text-align: center;
+}
+
+#categories {
+  float: left;
+  margin: 20px;
+  border: 1px solid red;
+}
+
+#letter {
+  font-size: 400pt;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  line-height: 300pt;
+  cursor: pointer;
+  /*border: 1px solid red;*/
+}
+
+#main {
+  float: left;
+}
+
+#timer {
+  font-size: 150pt;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  /*border: 1px solid red;*/
+}
