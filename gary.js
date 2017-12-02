@@ -13,12 +13,12 @@
 // limitations under the License.
 // ------------------------------------------------------------------------
 
-// let count;
-// let counter;
+// CONSTANTS
 const DEFAULT_START_TIME = 180;
 const DEFAULT_CATEGORY_NUMBER = 12;
 const ALPHABET = "ABCDEFGHIJKLMNOPRSTW";
 let audio = document.getElementById("audio");
+let timer = document.getElementById("timer");
 const CATEGORIES = [
   "A boy's name",
   "Jamaican towns/cities",
@@ -67,6 +67,7 @@ const CATEGORIES = [
   "American cities"
 ];
 
+// DATA TYPE METHODS
 Number.prototype.toTimeString = function() {
   let time = parseInt(this, 10);
   let m = Math.floor(time / 60);
@@ -87,33 +88,30 @@ Array.prototype.pluck = function() { // returns random item, which is deleted fr
   return selection;
 }
 
+// CLASSES
 class Countdown {
-  constructor(time = DEFAULT_START_TIME) {
-    this.time = time;
-    this.counter;
-    console.log("Created " + this.time + "s countdown.");
+  constructor(seconds = DEFAULT_START_TIME) {
+    this.secs = seconds;
+    this.id;
+    timer.innerHTML = this.secs.toTimeString();
   }
 
   start() {
-    clearInterval(this.counter);
-    // this.time = DEFAULT_START_TIME;
-    console.log("alpha", this.time, this.counter);
-    this.counter = setInterval(this.timer, 1000);
-    console.log("bravo", this.time, this.counter);
+    clearInterval(this.id);
+    this.secs = 3;
+    this.id = setInterval(this.tick, 1000);
   }
 
-  timer() {
-    console.log("charlie", this.time, this.counter);
-    this.time--;
-    console.log("delta", this.time, this.counter);
-    if (this.time < 0) {
-      clearInterval(this.counter);
+  tick() {
+    this.secs--;
+    if (this.secs < 0) {
+      clearInterval(this.id);
       return;
     }
-    if (this.time == 0) {
+    if (this.secs == 0) {
       audio.play();
     }
-    document.getElementById("timer").innerHTML = this.time.toTimeString();
+    timer.innerHTML = this.secs.toTimeString();
   }
 }
 
@@ -148,8 +146,33 @@ class Categories {
   }
 }
 
-generateLetter();
-generateCategories();
+// FUNCTIONS
+let secs = DEFAULT_START_TIME;
+let id;
+timer.innerHTML = secs.toTimeString();
+
+function start() {
+  clearInterval(id);
+  secs = DEFAULT_START_TIME;
+  id = setInterval(tick, 1000);
+}
+
+function tick() {
+  secs--;
+  if (secs < 0) {
+     clearInterval(id);
+     return;
+  }
+  if (secs == 0) {
+    audio.play();
+  }
+  timer.innerHTML = secs.toTimeString();
+}
+
+// UI FUNCTIONS
+function generateLetter() {
+  document.getElementById("letter").innerHTML = ALPHABET.random();
+}
 
 function generateCategories() {
   new Categories().publish();
@@ -159,26 +182,6 @@ function startTimer() {
   new Countdown().start();
 }
 
-// function start() {
-//   clearInterval(counter);
-//   count = 3;
-//   counter = setInterval(timer, 1000);
-// }
-//
-// function timer()
-// {
-//   count--;
-//   if (count < 0)
-//   {
-//      clearInterval(counter);
-//      return;
-//   }
-//   if (count == 0) {
-//     audio.play();
-//   }
-//   document.getElementById("timer").innerHTML = count.toTime();
-// }
-
-function generateLetter() {
-  document.getElementById("letter").innerHTML = ALPHABET.random();
-}
+// MAIN
+generateLetter();
+generateCategories();
