@@ -81,7 +81,7 @@ String.prototype.random = function() { // returns random character
 
 Array.prototype.pluck = function() { // returns random item, which is deleted from array
   const index = Math.floor(Math.random() * this.length);
-  console.log("Plucked item", index, "of", this.length);
+  // console.log("Plucked item", index, "of", this.length);
   const selection = this[index];
   this.splice(index, 1);
   return selection;
@@ -117,27 +117,20 @@ class Countdown {
   }
 }
 
-c = new Countdown();
-
-function start() {
-  c.start();
-}
-
 class Categories {
   constructor() {
-    this.all = CATEGORIES;
+    this.all = CATEGORIES.slice(0);
   }
 
   select(n = DEFAULT_CATEGORY_NUMBER) {
     if (n > this.all.length) {
       n = this.all.length;
     }
-    let master = this.all;
+    let master = this.all.slice(0);
     let list = [];
     for (let i = 0; i < n; i++) {
       list.push(master.pluck());
     }
-    // console.log("Categories:", list);
     return list;
   }
 
@@ -155,8 +148,16 @@ class Categories {
   }
 }
 
-l = new Categories();
-l.publish();
+generateLetter();
+generateCategories();
+
+function generateCategories() {
+  new Categories().publish();
+}
+
+function startTimer() {
+  new Countdown().start();
+}
 
 // function start() {
 //   clearInterval(counter);

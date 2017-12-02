@@ -5,12 +5,11 @@
 <body>
   <div id="main">
     <div id="letter" onclick="generateLetter()">X</div>
-    <div id="timer" onclick="c.start()">3:00</div>
+    <div id="timer" onclick="startTimer()">3:00</div>
     <!-- <button id="start" onclick="start()">Start</button> -->
     <!-- <button id="generate-letter" onclick="generateLetter()">Generate Letter</button> -->
   </div>
-  <div id="categories">Starter text
-  </div>
+  <div id="categories" onclick="generateCategories()"></div>
   <audio id="audio">
     <source src="audio.mp3" type="audio/mpeg">
   </audio>

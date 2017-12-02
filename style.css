@@ -1,50 +1,63 @@
 :root {
   --black: black;
-  --lt-grey: #f8f8f8;
+  --lt-grey: #eeeeee;
   --med-grey: #999;
   --dk-grey: #444;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica", "Roboto", "Droid Sans", "Arial", sans-serif;
-  margin: 5px;
+  margin: 0;
+  padding: 0;
 }
 
 #categories {
-  float: left;
-  margin: 0 30px;
-  /*border: 1px solid red;*/
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  display: inline-block;
+  /*float: left;*/
+  /*border: 1px dotted green;*/
 }
 
 #categories ol {
+  padding: 0 0 0 15px;
   list-style-position: inside;
+  /*border: 1px dotted orange;*/
 }
 
 #categories li {
+  margin: 0;
   font-size: 22pt;
   padding: 7px;
-  border-bottom: 1px solid var(--med-grey);
+  border-bottom: 1px solid var(--lt-grey);
+  /*border: 1px dotted purple;*/
 }
 
 #letter {
   text-align: center;
   font-size: 400pt;
-  font-weight: 300;
+  font-weight: 100;
   margin: 0;
   padding: 0;
   line-height: 300pt;
   cursor: pointer;
-  /*border: 1px solid red;*/
+  /*border: 1px dotted red;*/
 }
 
 #main {
-  float: left;
+  /*float: left;*/
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  width: 440px;
+  /*border: 1px dotted red;*/
 }
 
 #timer {
   text-align: center;
   font-size: 150pt;
-  font-weight: 500;
+  font-weight: 300;
   margin: 0;
   padding: 0;
   cursor: pointer;
