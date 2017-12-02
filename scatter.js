@@ -1,4 +1,4 @@
-// Scattergories Timer
+// Gary
 // ------------------------------------------------------------------------
 // Copyright 2017 Keiran King
 
@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 // ------------------------------------------------------------------------
+
 // let count;
 // let counter;
 const START_TIME = 180;
@@ -37,9 +38,9 @@ String.prototype.random = function() { // returns random character
   return this[Math.floor(Math.random() * this.length)];
 }
 
-Array.prototype.random = function() { // returns random item, which is deleted from array
+Array.prototype.pluck = function() { // returns random item, which is deleted from array
   console.log(this.length);
-  const index = Math.floor(Math.random() * this.length) - 1;
+  const index = Math.floor(Math.random() * this.length);
   console.log(index);
   const selection = this[index];
   delete this[index];
@@ -94,7 +95,7 @@ class Categories {
     let master = this.all;
     let list = [];
     for (let i = 0; i < n; i++) {
-      list.push(master.random());
+      list.push(master.pluck());
     }
     // console.log("Categories:", list);
     return list;
