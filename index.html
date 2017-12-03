@@ -4,10 +4,11 @@
 </head>
 <body>
   <div id="main">
-    <div id="letter" class="tooltip" data-tooltip="New letter" onclick="generateLetter()"></div>
-    <div id="timer" class="tooltip" data-tooltip="Play/pause. Double-click to reset." onclick="startAndStop()" ondblclick="reset()"></div>
+    <div id="letter" onclick="generateLetter()"></div>
+    <div id="timer" onclick="startAndStop()" ondblclick="reset()"></div>
   </div>
-  <div id="categories" class="tooltip" data-tooltip="Click the list." onclick="generateCategories()"></div>
+  <div id="categories" onclick="generateCategories()"></div>
+  <div id="footer"></div>
   <audio id="audio">
     <source src="audio.mp3" type="audio/mpeg">
   </audio>

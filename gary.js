@@ -101,6 +101,36 @@ class Categories {
   }
 }
 
+class Notification {
+  constructor(message, lifetime = undefined) {
+    this.message = message;
+    this.id = String(Math.floor(Math.random() * 100000) + 1);
+    this.post();
+    if (lifetime) {
+      this.dismiss(lifetime);
+    }
+  }
+
+  post() {
+    let div = document.createElement("DIV");
+    div.setAttribute("id", this.id);
+    div.setAttribute("class", "notification");
+    div.innerHTML = this.message;
+    div.addEventListener('click', this.dismiss);
+    document.getElementById("footer").appendChild(div);
+  }
+
+  update(message) {
+    document.getElementById(this.id).innerHTML = message;
+  }
+
+  dismiss(seconds = 0) {
+    let div = document.getElementById(this.id);
+    // seconds = (seconds === true) ? 10 : seconds;
+    setTimeout(function() { div.remove(); }, seconds * 1000);
+  }
+}
+
 // FUNCTIONS
 let secs = DEFAULT_START_TIME;
 let id;
@@ -150,3 +180,6 @@ function startTimer() {
 // MAIN
 generateLetter();
 generateCategories();
+// new Notification("Tip: Click letter or list to regenerate.", 30);
+// new Notification("Tip: Click timer to start or stop.", 30);
+// new Notification("Tip: Double-click timer to reset.", 30);
