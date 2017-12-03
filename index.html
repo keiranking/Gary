@@ -8,12 +8,26 @@
     <div id="timer" onclick="startAndStop()" ondblclick="reset(0)"></div>
   </div>
   <div id="categories" onclick="generateCategories()"></div>
-  <div id="footer"></div>
   <audio id="audio">
     <source src="audio.mp3" type="audio/mpeg">
   </audio>
+  <div id="footer">
+    <a onclick="show('rules')">Rules</a> &middot;
+    <a onclick="show('help')">Help</a>
+  </div>
   <div id="credits"><a href="http://www.keiranking.com/" target="_blank">keiranking.com</a> &middot;
   <a href="https://github.com/keiranking/Gary" target="_blank">GitHub</a> &middot; Gary</div>
+  <div id="rules" class="hidden">
+    <h3>The Rules</h3>
+    <p>Each round, players write answers that fit the categories, starting with the key letter, within the allotted time.</p>
+    <p>Each unique answer is worth 1 point. Alliterative answers are worth 1 point per word (eg. Daffy Duck, 2 pts).</p>
+    <p>Answers can only be used in one category. Player with the most points after all rounds are completed wins.</p>
+  </div>
+  <div id="help" class="hidden">
+    <h3>Help</h3>
+    <p>Click the letter or list to refresh them.</p>
+    <p>Click the timer to start (or pause). <br>Double-click to reset.</p>
+  </div>
   <script src="categories.js"></script>
   <script src="gary.js"></script>
 </body>

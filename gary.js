@@ -19,7 +19,7 @@ const WARNING_TIME = 15;
 const RESET_DELAY = 3;
 const DEFAULT_CATEGORY_NUMBER = 12;
 const ALPHABET = "ABCDEFGHIJKLMNOPRSTW";
-const CATEGORIES = STANDARD_CATEGORIES.slice(0).concat(GARY_CATEGORIES.slice(0));
+const CATEGORIES = STANDARD_CATEGORIES.slice(0).concat(NEW_CATEGORIES.slice(0));
 let audio = document.getElementById("audio");
 let timer = document.getElementById("timer");
 let categories = document.getElementById("categories");
@@ -123,7 +123,7 @@ class Notification {
     div.setAttribute("class", "notification");
     div.innerHTML = this.message;
     div.addEventListener('click', this.dismiss);
-    document.getElementById("footer").appendChild(div);
+    document.getElementById("main").appendChild(div);
   }
 
   update(message) {
@@ -196,6 +196,10 @@ function generateCategories() {
 
 function startTimer() {
   new Countdown().start();
+}
+
+function show(content) {
+  new Notification(document.getElementById(content).innerHTML);
 }
 
 // MAIN

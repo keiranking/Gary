@@ -1,7 +1,6 @@
 # Gary, a word game
 
-Gary is a word game for 2 or more players.
-Its rules are similar to [Scattergories](http://www.fgbradleys.com/rules/Scattergories.pdf), itself based on traditional games like Tutti Frutti.
+Gary is an alliterative word game for 2 or more players.
 
 ![A category word game](images/screenshot.png "Play with your friends")
 

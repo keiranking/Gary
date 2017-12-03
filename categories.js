@@ -248,7 +248,7 @@ const STANDARD_CATEGORIES = [
   "Holiday activities"
 ];
 
-const GARY_CATEGORIES = [
+const NEW_CATEGORIES = [
   "Things at a basketball game",
   "Things at a football game",
   "Thanksgiving items",
@@ -263,7 +263,7 @@ const GARY_CATEGORIES = [
   "Things made of fabric",
   "Things made of wood",
   "Things made of glass",
-  "Things you do in private",
+  "Private activities",
   "Things you recycle",
   "Microscopic things",
   "Things in outer space",
@@ -279,7 +279,6 @@ const GARY_CATEGORIES = [
   "Things only rich people have",
   "Famous people who aren't white",
   "Words associated with sex",
-  "'Buzz' words",
   "Words associated with body weight",
   "Words associated with men",
   "Words associated with women",
