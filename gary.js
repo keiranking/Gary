@@ -106,16 +106,26 @@ let secs = DEFAULT_START_TIME;
 let id;
 timer.innerHTML = secs.toTimeString();
 
-function start() {
+function startAndStop() {
+  clearInterval(id);
+  if (id) {
+    id = null;
+    return;
+  }
+  // secs = DEFAULT_START_TIME;
+  id = setInterval(tick, 1000);
+}
+
+function reset() {
   clearInterval(id);
   secs = DEFAULT_START_TIME;
-  id = setInterval(tick, 1000);
+  timer.innerHTML = secs.toTimeString();
 }
 
 function tick() {
   secs--;
   if (secs < 0) {
-     clearInterval(id);
+     reset();
      return;
   }
   if (secs == 0) {
