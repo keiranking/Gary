@@ -1,8 +1,8 @@
 # Gary, a word game
 
-Gary is an alliterative word game for 2 or more players.
+<img src="images/screenshot.svg" align="right" width="250" height="400">
 
-![A category word game](images/screenshot.png "Play with your friends")
+Gary is an alliterative word game for 2 or more players.
 
 ## License
 Licensed under [the Apache License, v2.0](http://www.apache.org/licenses/LICENSE-2.0) (the 'License').
