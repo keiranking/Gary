@@ -1,6 +1,6 @@
 # Gary, a word game
 
-<img src="images/screenshot.svg" align="right" width="250" height="400">
+<img src="images/screenshot.png" align="right" width="250" height="400">
 
 Gary is an alliterative word game for 2 or more players.
 
