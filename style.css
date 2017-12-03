@@ -110,6 +110,12 @@ body {
   /*border: 1px dotted blue;*/
 }
 
+#notebar {
+  position: absolute;
+  left: 5px;
+  bottom: 20px;
+}
+
 .notification {
   font-size: 9.5pt;
   line-height: 11pt;
@@ -119,11 +125,8 @@ body {
   border-radius: 6px;
   background-color: var(--dk-grey);
   color: var(--lt-grey);
-  position: absolute;
-  left: 5px;
-  bottom: 20px;
   z-index: 30;
-  /*float: left;*/
+  float: left;
 }
 
 .notification h3 {

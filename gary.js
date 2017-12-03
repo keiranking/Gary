@@ -123,7 +123,7 @@ class Notification {
     div.setAttribute("class", "notification");
     div.innerHTML = this.message;
     div.addEventListener('click', this.dismiss);
-    document.getElementById("main").appendChild(div);
+    document.getElementById("notebar").appendChild(div);
   }
 
   update(message) {
