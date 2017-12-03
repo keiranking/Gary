@@ -17,55 +17,9 @@
 const DEFAULT_START_TIME = 180;
 const DEFAULT_CATEGORY_NUMBER = 12;
 const ALPHABET = "ABCDEFGHIJKLMNOPRSTW";
+const CATEGORIES = STANDARD_CATEGORIES.slice(0).concat(GARY_CATEGORIES.slice(0));
 let audio = document.getElementById("audio");
 let timer = document.getElementById("timer");
-const CATEGORIES = [
-  "A boy's name",
-  "Jamaican towns/cities",
-  "Things that are cold",
-  "School supplies",
-  "Pro sports teams",
-  "Insects",
-  "Breakfast foods",
-  "Furniture",
-  "TV shows",
-  "Things found in the ocean",
-  "Jamaican personalities",
-  "Product names",
-
-  "Vegetables",
-  "States",
-  "Things you throw away",
-  "Occupations",
-  "Appliances",
-  "Cartoon characters",
-  "Types of drink",
-  "Musical groups",
-  "Store names",
-  "Things at a cricket game",
-  "Trees",
-  "Personality traits",
-
-  "Articles of clothing",
-  "Desserts",
-  "Car parts",
-  "Things found on a map",
-  "Athletes",
-  "4-letter words",
-  "Items in a refrigerator",
-  "Farm animals",
-  "Street names",
-  "Things at the beach",
-  "Colors",
-  "Tools",
-
-  "Things at a basketball game",
-  "Things at a football game",
-  "3-letter words",
-  "9-letter words",
-  "Wild animals",
-  "American cities"
-];
 
 // DATA TYPE METHODS
 Number.prototype.toTimeString = function() {
@@ -118,6 +72,7 @@ class Countdown {
 class Categories {
   constructor() {
     this.all = CATEGORIES.slice(0);
+    console.log("Created Categories object with " + this.all.length + " categories.")
   }
 
   select(n = DEFAULT_CATEGORY_NUMBER) {
