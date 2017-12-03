@@ -206,6 +206,3 @@ function show(content) {
 // MAIN
 generateLetter();
 generateCategories();
-// new Notification("Tip: Click letter or list to regenerate.", 30);
-// new Notification("Tip: Click timer to start or stop.", 30);
-// new Notification("Tip: Double-click timer to reset.", 30);

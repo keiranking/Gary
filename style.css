@@ -3,6 +3,7 @@
   --lt-grey: #eeeeee;
   --med-grey: #999;
   --dk-grey: #444;
+  --hover: #55b8fe;
   --warning: red;
 }
 
@@ -22,9 +23,17 @@ body {
   position: relative;
   border: 1px solid var(--lt-grey);
   border-radius: 8px;
-  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 6px 6px 15px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 6px 6px 15px 0px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 6px 6px 15px 0px rgba(0, 0, 0, 0.1);
+}
+
+#categories:hover {
+  /*outline: 2px solid var(--hover);*/
+  border: 3px solid var(--hover);
+  box-shadow: 8px 8px 15px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 8px 8px 15px 0px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 8px 8px 15px 0px rgba(0, 0, 0, 0.25);
 }
 
 #categories.tilt-left {
@@ -101,6 +110,10 @@ body {
   /*border: 1px dotted red;*/
 }
 
+#letter:hover {
+  color: var(--hover);
+}
+
 #main {
   float: left;
   margin: 0;
@@ -147,6 +160,10 @@ body {
   cursor: pointer;
   position: relative;
   /*border: 1px solid red;*/
+}
+
+#timer:hover {
+  color: var(--hover);
 }
 
 .warning {
