@@ -23,6 +23,7 @@ const CATEGORIES = STANDARD_CATEGORIES.slice(0).concat(NEW_CATEGORIES.slice(0));
 let audio = document.getElementById("audio");
 let timer = document.getElementById("timer");
 let categories = document.getElementById("categories");
+let card = document.getElementById("card");
 
 // DATA TYPE METHODS
 Number.prototype.toTimeString = function() {
@@ -186,13 +187,19 @@ function generateLetter() {
 
 function generateCategories() {
   new Categories().publish();
-  if (categories.classList.contains("tilt-left")) {
-    categories.classList.remove("tilt-left");
-    categories.classList.add("tilt-right");
+  if (card.classList.contains("tilt-left")) {
+    card.classList.remove("tilt-left");
+    card.classList.add("tilt-right");
   } else {
-    categories.classList.remove("tilt-right");
-    categories.classList.add("tilt-left");
+    card.classList.remove("tilt-right");
+    card.classList.add("tilt-left");
   }
+}
+
+function generateCard() {
+  generateLetter();
+  generateCategories();
+  reset(0);
 }
 
 function startTimer() {

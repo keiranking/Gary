@@ -3,11 +3,11 @@
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-  <div id="main">
-    <div id="letter" onclick="generateLetter()"></div>
-    <div id="timer" onclick="startAndStop()" ondblclick="reset(0)"></div>
+  <div id="card" onclick="generateCard()">
+    <div id="letter"></div>
+    <div id="categories"></div>
   </div>
-  <div id="categories" onclick="generateCategories()"></div>
+  <div id="timer" onclick="startAndStop()" ondblclick="reset(0)"></div>
   <audio id="audio">
     <source src="audio.mp3" type="audio/mpeg">
   </audio>
