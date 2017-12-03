@@ -12,24 +12,25 @@ body {
 }
 
 #categories {
-  margin: 0;
-  padding: 0;
+  margin: 15px 0 0 0;
+  padding: 0 0 0 15px;
   font-weight: 500;
-  display: inline-block;
-  /*float: left;*/
+  /*display: inline-block;*/
+  float: left;
   /*border: 1px dotted green;*/
 }
 
 #categories ol {
-  padding: 0 0 0 15px;
+  margin: 0;
+  padding: 0;
   list-style-position: inside;
   /*border: 1px dotted orange;*/
 }
 
 #categories li {
   margin: 0;
+  padding: 7px 0;
   font-size: 22pt;
-  padding: 7px;
   border-bottom: 1px solid var(--lt-grey);
   /*border: 1px dotted purple;*/
 }
@@ -38,7 +39,7 @@ body {
   text-align: center;
   font-size: 400pt;
   font-weight: 100;
-  margin: 0;
+  margin: 0 0 0 0;
   padding: 0;
   line-height: 300pt;
   cursor: pointer;
@@ -46,12 +47,12 @@ body {
 }
 
 #main {
-  /*float: left;*/
+  float: left;
   margin: 0;
   padding: 0;
-  display: inline-block;
+  /*display: inline-block;*/
   width: 440px;
-  /*border: 1px dotted red;*/
+  /*border: 1px dotted blue;*/
 }
 
 #timer {

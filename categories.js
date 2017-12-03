@@ -284,5 +284,6 @@ const GARY_CATEGORIES = [
   "Reasons to text someone",
   "Reasons to talk to your mother",
   "Reasons to get a babysitter",
-  "Reasons to get a divorce"
+  "Reasons to get a divorce",
+  "Things found at a wedding"
 ];
