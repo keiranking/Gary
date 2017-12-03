@@ -155,6 +155,7 @@ function startAndStop() {
 function reset(delay = RESET_DELAY) {
   clearInterval(id);
   setTimeout(function() {
+    id = null;
     secs = DEFAULT_START_TIME;
     timer.innerHTML = secs.toTimeString();
     timer.classList.remove("warning");
