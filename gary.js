@@ -15,11 +15,14 @@
 
 // CONSTANTS
 const DEFAULT_START_TIME = 180;
+const WARNING_TIME = 15;
+const RESET_DELAY = 3;
 const DEFAULT_CATEGORY_NUMBER = 12;
 const ALPHABET = "ABCDEFGHIJKLMNOPRSTW";
 const CATEGORIES = STANDARD_CATEGORIES.slice(0).concat(GARY_CATEGORIES.slice(0));
 let audio = document.getElementById("audio");
 let timer = document.getElementById("timer");
+let categories = document.getElementById("categories");
 
 // DATA TYPE METHODS
 Number.prototype.toTimeString = function() {
@@ -95,6 +98,9 @@ class Categories {
     for(let i = 0; i < n; i++) {
       let li = document.createElement("LI");
       li.innerHTML = cats[i];
+      if (i == n - 1) {
+        li.classList.add("last");
+      }
       ol.appendChild(li);
     }
     catDiv.appendChild(ol);
@@ -146,14 +152,22 @@ function startAndStop() {
   id = setInterval(tick, 1000);
 }
 
-function reset() {
+function reset(delay = RESET_DELAY) {
   clearInterval(id);
-  secs = DEFAULT_START_TIME;
-  timer.innerHTML = secs.toTimeString();
+  setTimeout(function() {
+    secs = DEFAULT_START_TIME;
+    timer.innerHTML = secs.toTimeString();
+    timer.classList.remove("warning");
+  }, delay * 1000);
 }
 
 function tick() {
   secs--;
+  if (secs <= WARNING_TIME) {
+    timer.classList.add("warning");
+  } else {
+    timer.classList.remove("warning");
+  }
   if (secs < 0) {
      reset();
      return;
@@ -171,6 +185,13 @@ function generateLetter() {
 
 function generateCategories() {
   new Categories().publish();
+  if (categories.classList.contains("tilt-left")) {
+    categories.classList.remove("tilt-left");
+    categories.classList.add("tilt-right");
+  } else {
+    categories.classList.remove("tilt-right");
+    categories.classList.add("tilt-left");
+  }
 }
 
 function startTimer() {
