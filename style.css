@@ -17,6 +17,8 @@ body {
   font-weight: 500;
   /*display: inline-block;*/
   float: left;
+  cursor: pointer;
+  position: relative;
   /*border: 1px dotted green;*/
 }
 
@@ -35,6 +37,23 @@ body {
   /*border: 1px dotted purple;*/
 }
 
+#credits {
+  font-size: 9.5pt;
+  font-weight: 400;
+  color: var(--med-grey);
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  /*float: right;*/
+  /*margin: 2px 0 0 0;*/
+}
+
+#credits a {
+  font-weight: 500;
+  color: var(--med-grey);
+  text-decoration: none;
+}
+
 #letter {
   text-align: center;
   font-size: 400pt;
@@ -43,6 +62,7 @@ body {
   padding: 0;
   line-height: 300pt;
   cursor: pointer;
+  position: relative;
   /*border: 1px dotted red;*/
 }
 
@@ -62,5 +82,26 @@ body {
   margin: 0;
   padding: 0;
   cursor: pointer;
+  position: relative;
   /*border: 1px solid red;*/
+}
+
+.tooltip:hover:after {
+  content: attr(data-tooltip);
+  line-height: normal;
+  margin: 4px 0;
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid black;
+  background: white;
+  color: black;
+  font-size: 10pt;
+  font-weight: 500;
+  position: absolute;
+  /*text-align: center;*/
+  left: 20px;
+  top: 20px;
+  white-space: nowrap;
+  z-index: 20;
+  opacity: .9;
 }

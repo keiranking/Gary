@@ -4,13 +4,16 @@
 </head>
 <body>
   <div id="main">
-    <div id="letter" onclick="generateLetter()"></div>
-    <div id="timer" onclick="startAndStop()" ondblclick="reset()"></div>
+    <div id="letter" class="tooltip" data-tooltip="Click the letter." onclick="generateLetter()"></div>
+    <div id="timer" class="tooltip" data-tooltip="Click or double-click the timer." onclick="startAndStop()" ondblclick="reset()"></div>
   </div>
-  <div id="categories" onclick="generateCategories()"></div>
+  <div id="categories" class="tooltip" data-tooltip="Click the list." onclick="generateCategories()"></div>
   <audio id="audio">
     <source src="audio.mp3" type="audio/mpeg">
   </audio>
+  <div id="credits"><a href="http://www.keiranking.com/" target="_blank">keiranking.com</a> &middot;
+  <a href="https://github.com/keiranking/Gary" target="_blank">GitHub</a> &middot; Gary</div>
   <script src="categories.js"></script>
   <script src="gary.js"></script>
+</body>
 </html>
