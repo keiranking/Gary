@@ -130,6 +130,7 @@ body {
 }
 
 .notification {
+  text-align: left;
   font-size: 9.5pt;
   line-height: 11pt;
   margin: 12px;
