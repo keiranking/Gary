@@ -285,6 +285,7 @@ const NEW_CATEGORIES = [
   "Words associated with summer",
   "Words associated with religion",
   "War terms",
+  "Science fiction terms",
   "New Year's Eve words",
   "Valentine's Day words",
   "Words ending in 'T'",

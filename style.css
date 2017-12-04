@@ -69,10 +69,10 @@ body {
 }
 
 #categories li {
-  text-align: center;
+  /*text-align: center;*/
   counter-increment: cat;
   margin: 0;
-  padding: 6px 1.8em 5px 1.8em;
+  padding: 5px 0.5em 5px 0em;
   font-size: 17pt;
   border-bottom: 1px solid var(--lt-grey);
   z-index: 6;
@@ -83,15 +83,18 @@ body {
   font-size: 90%;
   content: counter(cat);
   display: inline-block;
+  padding-left: 0.2em;
+  padding-right: 0.5em;
   text-align: center;
+  vertical-align: baseline;
   color: var(--numbers);
-  width: 1.8em;
-  position: absolute;
-  left: 0;
+  width: 1em;
+  /*position: absolute;*/
+  /*left: 0;*/
   z-index: 5;
 }
 
-#categories li:after {
+/*#categories li:after {
   font-size: 90%;
   content: counter(cat);
   display: inline-block;
@@ -101,7 +104,7 @@ body {
   position: absolute;
   right: 0;
   z-index: 5;
-}
+}*/
 
 #categories li.last {
   border: none;
