@@ -31,7 +31,6 @@ body {
   font-weight: 400;
   text-align: center;
   display: inline-block;
-  /*float: left;*/
   cursor: pointer;
   border: 1px solid var(--lt-grey);
   border-radius: 8px;
@@ -67,12 +66,10 @@ body {
   padding: 0;
   list-style: none;
   position: relative;
-  /*list-style-position: inside;*/
   /*border: 1px dotted orange;*/
 }
 
 #categories li {
-  /*text-align: center;*/
   counter-increment: cat;
   margin: 0;
   padding: 5px 0.5em 5px 0em;
@@ -92,22 +89,8 @@ body {
   vertical-align: baseline;
   color: var(--numbers);
   width: 1em;
-  /*position: absolute;*/
-  /*left: 0;*/
   z-index: 5;
 }
-
-/*#categories li:after {
-  font-size: 90%;
-  content: counter(cat);
-  display: inline-block;
-  text-align: center;
-  color: var(--numbers);
-  width: 1.8em;
-  position: absolute;
-  right: 0;
-  z-index: 5;
-}*/
 
 #categories li.last {
   border: none;
@@ -202,7 +185,6 @@ body {
   cursor: pointer;
   position: absolute;
   width: 120px;
-  /*width: 100%;*/
   left: 50%;
   margin-left: -60px;
   bottom: 0;

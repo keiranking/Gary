@@ -12,22 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// CONSTANTS ------------------------------------------------------------------
-const DEFAULT_START_TIME = 180;
+// GLOBAL CONSTANTS -----------------------------------------------------------
+const ROUND_DURATION = 180;
 const WARNING_TIME = 15;
 const RESET_DELAY = 3;
-const DEFAULT_CATEGORY_NUMBER = 12;
+const NO_OF_CATEGORIES = 12;
 const ALPHABET = "ABCDEFGHIJKLMNOPRSTW";
-const CATEGORIES = STANDARD_CATEGORIES.slice(0).concat(NEW_CATEGORIES.slice(0));
+const CATEGORIES = STANDARD_CATEGORIES.concat(NEW_CATEGORIES);
 
-// DOM VARIABLES --------------------------------------------------------------
+// GLOBAL DOM VARIABLES -------------------------------------------------------
 let audio = document.getElementById("audio");
 let timer = document.getElementById("timer");
 let categories = document.getElementById("categories");
 let card = document.getElementById("card");
 let letter = document.getElementById("letter");
+let note = null;
 
-// DATA TYPE METHODS ----------------------------------------------------------
+// DATA TYPE FUNCTIONS --------------------------------------------------------
 Number.prototype.toTimeString = function() { // converts seconds to MM:SS string
   let time = parseInt(this, 10);
   let m = Math.floor(time / 60);
@@ -53,10 +54,10 @@ class Card {
   constructor() {
     this.letter = ALPHABET.random();
     this.list = this.select();
-    console.log("Generated new Card.");
+    console.log("New card.");
   }
 
-  select(n = DEFAULT_CATEGORY_NUMBER) {
+  select(n = NO_OF_CATEGORIES) {
     if (n > CATEGORIES.length) {
       n = CATEGORIES.length;
     }
@@ -88,12 +89,12 @@ class Card {
       card.classList.add("tilt-left");
     }
     letter.innerHTML = this.letter;
-    console.log("Published Card.");
+    // console.log("Card published.");
   }
 }
 
 class Timer {
-  constructor(seconds = DEFAULT_START_TIME) {
+  constructor(seconds = ROUND_DURATION) {
     this.secs = seconds;
     this.id = null;
   }
@@ -113,7 +114,7 @@ class Timer {
     clearInterval(this.id);
     setTimeout(function() { // setTimeout inside a class needs .bind(this) to work
       this.id = null;
-      this.secs = DEFAULT_START_TIME;
+      this.secs = ROUND_DURATION;
       this.publish();
       console.log("Timer reset.");
   }.bind(this), delay * 1000);
@@ -177,6 +178,12 @@ function generateCard() {
   c.reset(0);
 }
 
+function startNewRound() {
+  new Card().publish();
+  c.reset(0);
+  c.toggle();
+}
+
 function toggleTimer() {
   c.toggle();
 }
@@ -186,9 +193,13 @@ function resetTimer() {
 }
 
 function show(content) {
-  new Notification(document.getElementById(content).innerHTML);
+  if (note) {
+    note.dismiss();
+  }
+  note = new Notification(document.getElementById(content).innerHTML);
 }
 
 // MAIN -----------------------------------------------------------------------
+console.log(CATEGORIES.length + " categories in use.");
 c = new Timer();
 generateCard();
