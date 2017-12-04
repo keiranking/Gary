@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lusitana|Crimson+Text:400');
+@import url('https://fonts.googleapis.com/css?family=Lusitana:400');
 
 :root {
   --black: black;
@@ -7,7 +7,7 @@
   --dk-grey: #444;
   --hover: #55b8fe;
   --warning: red;
-  --numbers: #e8e8e8;
+  --numbers: #ccc;
 }
 
 body {
@@ -17,11 +17,14 @@ body {
   text-align: center;
   min-width: 500px;
   min-height: 700px;
+  user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
   /*position: relative;*/
 }
 
 #card {
-  font-family: 'Lusitana', 'Crimson Text', 'Garamond', 'Georgia', serif;
+  font-family: 'Lusitana', 'Garamond', 'Georgia', serif;
   margin: 20px 30px 0 30px;
   padding: 15px 25px;
   min-width: 300px;

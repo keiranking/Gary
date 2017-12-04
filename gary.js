@@ -1,7 +1,7 @@
 // Gary
-// ------------------------------------------------------------------------
 // Copyright 2017 Keiran King
 
+// LICENSE --------------------------------------------------------------------
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // (https://www.apache.org/licenses/LICENSE-2.0)
@@ -11,22 +11,24 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-// ------------------------------------------------------------------------
 
-// CONSTANTS
+// CONSTANTS ------------------------------------------------------------------
 const DEFAULT_START_TIME = 180;
 const WARNING_TIME = 15;
 const RESET_DELAY = 3;
 const DEFAULT_CATEGORY_NUMBER = 12;
 const ALPHABET = "ABCDEFGHIJKLMNOPRSTW";
 const CATEGORIES = STANDARD_CATEGORIES.slice(0).concat(NEW_CATEGORIES.slice(0));
+
+// DOM VARIABLES --------------------------------------------------------------
 let audio = document.getElementById("audio");
 let timer = document.getElementById("timer");
 let categories = document.getElementById("categories");
 let card = document.getElementById("card");
+let letter = document.getElementById("letter");
 
-// DATA TYPE METHODS
-Number.prototype.toTimeString = function() {
+// DATA TYPE METHODS ----------------------------------------------------------
+Number.prototype.toTimeString = function() { // converts seconds to MM:SS string
   let time = parseInt(this, 10);
   let m = Math.floor(time / 60);
   let ss = time - (m * 60);
@@ -46,44 +48,19 @@ Array.prototype.pluck = function() { // returns random item, which is deleted fr
   return selection;
 }
 
-// CLASSES
-class Countdown {
-  constructor(seconds = DEFAULT_START_TIME) {
-    this.secs = seconds;
-    this.id;
-    timer.innerHTML = this.secs.toTimeString();
-  }
-
-  start() {
-    clearInterval(this.id);
-    this.secs = 3;
-    this.id = setInterval(this.tick, 1000);
-  }
-
-  tick() {
-    this.secs--;
-    if (this.secs < 0) {
-      clearInterval(this.id);
-      return;
-    }
-    if (this.secs == 0) {
-      audio.play();
-    }
-    timer.innerHTML = this.secs.toTimeString();
-  }
-}
-
-class Categories {
+// CLASSES --------------------------------------------------------------------
+class Card {
   constructor() {
-    this.all = CATEGORIES.slice(0);
-    console.log("Created Categories object with " + this.all.length + " categories.")
+    this.letter = ALPHABET.random();
+    this.list = this.select();
+    console.log("Generated new Card.");
   }
 
   select(n = DEFAULT_CATEGORY_NUMBER) {
-    if (n > this.all.length) {
-      n = this.all.length;
+    if (n > CATEGORIES.length) {
+      n = CATEGORIES.length;
     }
-    let master = this.all.slice(0);
+    let master = CATEGORIES.slice(0);
     let list = [];
     for (let i = 0; i < n; i++) {
       list.push(master.pluck());
@@ -91,20 +68,76 @@ class Categories {
     return list;
   }
 
-  publish(n = DEFAULT_CATEGORY_NUMBER) {
-    let catDiv = document.getElementById("categories");
-    catDiv.innerHTML = "";
-    const cats = this.select(n);
+  publish() {
+    categories.innerHTML = "";
     let ol = document.createElement("OL");
-    for(let i = 0; i < n; i++) {
+    for (let i = 0; i < this.list.length; i++) {
       let li = document.createElement("LI");
-      li.innerHTML = cats[i];
-      if (i == n - 1) {
+      li.innerHTML = this.list[i];
+      if (i == this.list.length - 1) {
         li.classList.add("last");
       }
       ol.appendChild(li);
     }
-    catDiv.appendChild(ol);
+    categories.appendChild(ol);
+    if (card.classList.contains("tilt-left")) {
+      card.classList.remove("tilt-left");
+      card.classList.add("tilt-right");
+    } else {
+      card.classList.remove("tilt-right");
+      card.classList.add("tilt-left");
+    }
+    letter.innerHTML = this.letter;
+    console.log("Published Card.");
+  }
+}
+
+class Timer {
+  constructor(seconds = DEFAULT_START_TIME) {
+    this.secs = seconds;
+    this.id = null;
+  }
+
+  toggle() {
+    clearInterval(this.id);
+    if (this.id) {
+      console.log("Timer paused.");
+      this.id = null;
+      return;
+    }
+    console.log("Timer on.");
+    this.id = setInterval(this.tick.bind(this), 1000); // setInterval inside a class needs .bind(this) to work
+  }
+
+  reset(delay = RESET_DELAY) {
+    clearInterval(this.id);
+    setTimeout(function() { // setTimeout inside a class needs .bind(this) to work
+      this.id = null;
+      this.secs = DEFAULT_START_TIME;
+      this.publish();
+      console.log("Timer reset.");
+  }.bind(this), delay * 1000);
+  }
+
+  tick() {
+    this.secs--;
+    if (this.secs < 0) {
+      this.reset();
+      return;
+    }
+    if (this.secs == 0) {
+      audio.play();
+    }
+    this.publish();
+  }
+
+  publish() {
+    if (this.secs <= WARNING_TIME) {
+      timer.classList.add("warning");
+    } else {
+      timer.classList.remove("warning");
+    }
+    timer.innerHTML = this.secs.toTimeString();
   }
 }
 
@@ -138,78 +171,24 @@ class Notification {
   }
 }
 
-// FUNCTIONS
-let secs = DEFAULT_START_TIME;
-let id;
-timer.innerHTML = secs.toTimeString();
-
-function startAndStop() {
-  clearInterval(id);
-  if (id) {
-    id = null;
-    return;
-  }
-  // secs = DEFAULT_START_TIME;
-  id = setInterval(tick, 1000);
-}
-
-function reset(delay = RESET_DELAY) {
-  clearInterval(id);
-  setTimeout(function() {
-    id = null;
-    secs = DEFAULT_START_TIME;
-    timer.innerHTML = secs.toTimeString();
-    timer.classList.remove("warning");
-  }, delay * 1000);
-}
-
-function tick() {
-  secs--;
-  if (secs <= WARNING_TIME) {
-    timer.classList.add("warning");
-  } else {
-    timer.classList.remove("warning");
-  }
-  if (secs < 0) {
-     reset();
-     return;
-  }
-  if (secs == 0) {
-    audio.play();
-  }
-  timer.innerHTML = secs.toTimeString();
-}
-
-// UI FUNCTIONS
-function generateLetter() {
-  document.getElementById("letter").innerHTML = ALPHABET.random();
-}
-
-function generateCategories() {
-  new Categories().publish();
-  if (card.classList.contains("tilt-left")) {
-    card.classList.remove("tilt-left");
-    card.classList.add("tilt-right");
-  } else {
-    card.classList.remove("tilt-right");
-    card.classList.add("tilt-left");
-  }
-}
-
+// FUNCTIONS ------------------------------------------------------------------
 function generateCard() {
-  generateLetter();
-  generateCategories();
-  reset(0);
+  new Card().publish();
+  c.reset(0);
 }
 
-function startTimer() {
-  new Countdown().start();
+function toggleTimer() {
+  c.toggle();
+}
+
+function resetTimer() {
+  c.reset(0);
 }
 
 function show(content) {
   new Notification(document.getElementById(content).innerHTML);
 }
 
-// MAIN
-generateLetter();
-generateCategories();
+// MAIN -----------------------------------------------------------------------
+c = new Timer();
+generateCard();
