@@ -6,7 +6,7 @@ Gary is an alliterative word game for 2 or more players.
 
 ## Setup
 * Go to [keiranking.com/gary](http://www.keiranking.com/gary/).
-* Start the timer.
+* Start playing.
 
 ## Rules
 * Each round, players write answers that fit the categories, starting with the key letter, within the allotted time.
