@@ -17,10 +17,6 @@ const ROUND_DURATION = 180;
 const WARNING_TIME = 15;
 const RESET_DELAY = 3;
 const NO_OF_CATEGORIES = 12;
-// const EASY = 0;
-// const MEDIUM = 4;
-// const HARD = 8;
-// const INSANE = 12;
 const ALPHABET = "ABCDEFGHIJKLMNOPRSTW";
 
 // GLOBAL DOM VARIABLES -------------------------------------------------------
@@ -31,7 +27,6 @@ let card = document.getElementById("card");
 let letter = document.getElementById("letter");
 let note = null;
 let localization = null;
-// let difficulty = EASY;
 
 // DATA TYPE FUNCTIONS --------------------------------------------------------
 Number.prototype.toTimeString = function() { // converts seconds to MM:SS string
@@ -203,12 +198,6 @@ class Notification {
   }
 }
 
-class Localization {
-  constructor() {
-    //
-  }
-}
-
 // FUNCTIONS ------------------------------------------------------------------
 function startNewRound() {
   new Card();
@@ -226,9 +215,8 @@ function resetTimer() {
 
 function initializeLocalizations() {
   let l = document.getElementById("localization");
-  let keys = Object.keys(LOCAL_CATEGORIES)
+  let keys = Object.keys(LOCAL_CATEGORIES);
   keys.push("World");
-  console.log(keys);
   for (let i = 0; i < keys.length; i++) {
     let option = document.createElement("OPTION");
     option.value = keys[i];
@@ -260,5 +248,5 @@ function show(content) {
 report();
 initializeLocalizations();
 setLocalization();
-t = new Timer();
+let t = new Timer();
 new Card();

@@ -362,7 +362,10 @@ const LOCAL_CATEGORIES = {
     "Things at Jamaica Carnival",
     "Things found in Kingston"
   ],
-  "UK": [],
+  "UK": [
+    "British towns/cities",
+    "Things found in London"
+  ],
   "US": [
     "American cities",
     "American foods",

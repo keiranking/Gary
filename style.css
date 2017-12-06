@@ -3,7 +3,7 @@
 :root {
   --black: black;
   --lt-grey: #eee;
-  --med-grey: #ccc;
+  --med-grey: #aaa;
   --dk-grey: #444;
   --hover: #55b8fe;
   --warning: red;
@@ -121,6 +121,10 @@ body {
   bottom: 5px;
 }
 
+#footer a:hover {
+  color: var(--dk-grey);
+}
+
 .hidden {
   display: none;
 }
@@ -174,6 +178,26 @@ body {
   font-weight: 600;
   color: var(--med-grey);
   text-transform: uppercase;
+}
+
+select {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica', 'Arial', sans-serif;
+  font-size: 9.5pt;
+  margin: 0 5px 0 0;
+  padding: 0;
+  /*border: 1px solid var(--med-grey);*/
+  border: 1px solid white;
+  color: var(--med-grey);
+  background-color: white;
+}
+
+select:hover {
+  border: 1px solid var(--dk-grey);
+  color: var(--dk-grey);
+}
+
+select:focus {
+  outline: none;
 }
 
 #timer {
