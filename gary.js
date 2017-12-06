@@ -79,6 +79,7 @@ class Card {
     this.letter = ALPHABET.random();
     this.list = this.select();
     console.log("New card.");
+    this.publish();
   }
 
   select(n = NO_OF_CATEGORIES) {
@@ -125,6 +126,7 @@ class Timer {
   constructor(seconds = ROUND_DURATION) {
     this.secs = seconds;
     this.id = null;
+    this.publish();
   }
 
   toggle() {
@@ -138,14 +140,12 @@ class Timer {
     this.id = setInterval(this.tick.bind(this), 1000); // setInterval inside a class needs .bind(this) to work
   }
 
-  reset(delay = RESET_DELAY) {
+  reset() {
     clearInterval(this.id);
-    setTimeout(function() { // setTimeout inside a class needs .bind(this) to work
-      this.id = null;
-      this.secs = ROUND_DURATION;
-      this.publish();
-      console.log("Timer reset.");
-  }.bind(this), delay * 1000);
+    this.id = null;
+    this.secs = ROUND_DURATION;
+    this.publish();
+    console.log("Timer reset.");
   }
 
   tick() {
@@ -201,23 +201,23 @@ class Notification {
 }
 
 // FUNCTIONS ------------------------------------------------------------------
-function generateCard() {
-  new Card().publish();
-  c.reset(0);
-}
+// function generateCard() {
+//   new Card();
+//   t.reset();
+// }
 
 function startNewRound() {
-  new Card().publish();
-  c.reset(0);
-  c.toggle();
+  new Card();
+  t.reset();
+  t.toggle();
 }
 
 function toggleTimer() {
-  c.toggle();
+  t.toggle();
 }
 
 function resetTimer() {
-  c.reset(0);
+  t.reset();
 }
 
 function show(content) {
@@ -229,5 +229,5 @@ function show(content) {
 
 // MAIN -----------------------------------------------------------------------
 console.log(CATEGORIES.flatten().length + " categories in use.");
-c = new Timer();
-generateCard();
+t = new Timer();
+new Card();

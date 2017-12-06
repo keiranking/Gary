@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lusitana:400');
+@import url('https://fonts.googleapis.com/css?family=EB+Garamond|Lusitana:400');
 
 :root {
   --black: black;
@@ -11,7 +11,7 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica", "Roboto", "Droid Sans", "Arial", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica', 'Arial', sans-serif;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -126,7 +126,7 @@ body {
 }
 
 #letter {
-  font-family: "Garamond", "Georgia", serif;
+  font-family: 'EB Garamond', 'Lusitana', 'Garamond', 'Georgia', serif;
   text-align: center;
   font-size: 50pt;
   margin: 0 0 0 0;

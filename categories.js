@@ -313,6 +313,7 @@ const CATEGORIES = {
       "Things that have stripes",
       "Things that have wheels",
       "Things that jump/bounce",
+      "Things that spin",
       "Things you make",
       "Things you shouldn't touch",
       "Things you shout",
