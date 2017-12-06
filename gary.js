@@ -17,8 +17,11 @@ const ROUND_DURATION = 180;
 const WARNING_TIME = 15;
 const RESET_DELAY = 3;
 const NO_OF_CATEGORIES = 12;
+const EASY = 0;
+const MEDIUM = 4;
+const HARD = 8;
+const INSANE = 12;
 const ALPHABET = "ABCDEFGHIJKLMNOPRSTW";
-const CATEGORIES = STANDARD_CATEGORIES.concat(NEW_CATEGORIES);
 
 // GLOBAL DOM VARIABLES -------------------------------------------------------
 let audio = document.getElementById("audio");
@@ -27,6 +30,7 @@ let categories = document.getElementById("categories");
 let card = document.getElementById("card");
 let letter = document.getElementById("letter");
 let note = null;
+let difficulty = EASY;
 
 // DATA TYPE FUNCTIONS --------------------------------------------------------
 Number.prototype.toTimeString = function() { // converts seconds to MM:SS string
@@ -37,16 +41,36 @@ Number.prototype.toTimeString = function() { // converts seconds to MM:SS string
   return m + ":" + ss;
 }
 
-String.prototype.random = function() { // returns random character
-  return this[Math.floor(Math.random() * this.length)];
+Number.prototype.random = function() { // returns random number between 0 and the number (exclusive)
+  return Math.floor(Math.random() * this);
+}
+
+String.prototype.random = function() { // returns random character from string
+  return this[this.length.random()];
 }
 
 Array.prototype.pluck = function() { // returns random item, which is deleted from array
-  const index = Math.floor(Math.random() * this.length);
-  // console.log("Plucked item", index, "of", this.length);
+  const index = this.length.random();
   const selection = this[index];
   this.splice(index, 1);
   return selection;
+}
+
+Array.prototype.random = function() { // returns random character from array
+  return this[this.length.random()];
+}
+
+Object.prototype.randomKey = function() { // returns random key from dictionary
+  return Object.keys(this).random();
+}
+
+Object.prototype.flatten = function() { // returns flattened array of all nested items in object
+  let array = [];
+  let keys = Object.keys(this);
+  for (i = 0; i < keys.length; i++) {
+    array = array.concat(this[keys[i]]);
+  }
+  return array;
 }
 
 // CLASSES --------------------------------------------------------------------
@@ -58,13 +82,18 @@ class Card {
   }
 
   select(n = NO_OF_CATEGORIES) {
-    if (n > CATEGORIES.length) {
-      n = CATEGORIES.length;
-    }
-    let master = CATEGORIES.slice(0);
+    let all = JSON.parse(JSON.stringify(CATEGORIES));
     let list = [];
-    for (let i = 0; i < n; i++) {
-      list.push(master.pluck());
+    if (difficulty) {
+      let k = all.randomKey();
+      for (let i = 0; i < difficulty; i++) {
+        list.push(all[k].pluck());
+      }
+      delete all[k];
+    }
+    let flat = all.flatten();
+    for (let i = difficulty; i < n; i++) {
+      list.push(flat.pluck());
     }
     return list;
   }
@@ -89,7 +118,6 @@ class Card {
       card.classList.add("tilt-left");
     }
     letter.innerHTML = this.letter;
-    // console.log("Card published.");
   }
 }
 
@@ -145,7 +173,7 @@ class Timer {
 class Notification {
   constructor(message, lifetime = undefined) {
     this.message = message;
-    this.id = String(Math.floor(Math.random() * 100000) + 1);
+    this.id = (100000).random().toString();
     this.post();
     if (lifetime) {
       this.dismiss(lifetime);
@@ -200,6 +228,6 @@ function show(content) {
 }
 
 // MAIN -----------------------------------------------------------------------
-console.log(CATEGORIES.length + " categories in use.");
+console.log(CATEGORIES.flatten().length + " categories in use.");
 c = new Timer();
 generateCard();
