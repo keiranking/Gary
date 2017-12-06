@@ -354,7 +354,7 @@ const CATEGORIES = [
 ];
 
 const LOCAL_CATEGORIES = {
-  "Jamaica": [
+  'Jamaica': [
     "Caribbean foods",
     "Jamaican personalities",
     "Jamaican towns/cities",
@@ -362,11 +362,11 @@ const LOCAL_CATEGORIES = {
     "Things at Jamaica Carnival",
     "Things found in Kingston"
   ],
-  "UK": [
+  'UK': [
     "British towns/cities",
     "Things found in London"
   ],
-  "US": [
+  'US': [
     "American cities",
     "American foods",
     "Thanksgiving items",
