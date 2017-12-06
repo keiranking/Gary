@@ -77,9 +77,18 @@ Object.prototype.flatten = function() { // returns flattened array of all nested
 class Card {
   constructor() {
     this.letter = ALPHABET.random();
-    this.list = this.select();
+    this.list = this.simpleSelect();
     console.log("New card.");
     this.publish();
+  }
+
+  simpleSelect(n = NO_OF_CATEGORIES) {
+    let all = CATEGORIES.flatten();
+    let list = [];
+    for (let i = 0; i < n; i++) {
+      list.push(all.pluck());
+    }
+    return list;
   }
 
   select(n = NO_OF_CATEGORIES) {
