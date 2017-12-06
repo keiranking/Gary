@@ -13,7 +13,12 @@
   </audio>
   <div id="footer">
     <a onclick="show('rules')">Rules</a> &middot;
-    <a onclick="show('help')">Help</a>
+    <a onclick="show('help')">Help</a> &middot;
+    <select id="localization" onchange="setLocalization()">
+      <option value="" disabled="disabled">Localization:</option>
+      <option value="none">None</option>
+      <!-- <option value="all" selected>World</option> -->
+    </select>
   </div>
   <div id="credits"><a href="http://www.keiranking.com/" target="_blank">keiranking.com</a> &middot;
   <a href="https://github.com/keiranking/Gary" target="_blank">GitHub</a> &middot; Gary</div>

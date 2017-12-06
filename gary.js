@@ -17,10 +17,10 @@ const ROUND_DURATION = 180;
 const WARNING_TIME = 15;
 const RESET_DELAY = 3;
 const NO_OF_CATEGORIES = 12;
-const EASY = 0;
-const MEDIUM = 4;
-const HARD = 8;
-const INSANE = 12;
+// const EASY = 0;
+// const MEDIUM = 4;
+// const HARD = 8;
+// const INSANE = 12;
 const ALPHABET = "ABCDEFGHIJKLMNOPRSTW";
 
 // GLOBAL DOM VARIABLES -------------------------------------------------------
@@ -30,7 +30,8 @@ let categories = document.getElementById("categories");
 let card = document.getElementById("card");
 let letter = document.getElementById("letter");
 let note = null;
-let difficulty = EASY;
+let localization = null;
+// let difficulty = EASY;
 
 // DATA TYPE FUNCTIONS --------------------------------------------------------
 Number.prototype.toTimeString = function() { // converts seconds to MM:SS string
@@ -56,7 +57,7 @@ Array.prototype.pluck = function() { // returns random item, which is deleted fr
   return selection;
 }
 
-Array.prototype.random = function() { // returns random character from array
+Array.prototype.random = function() { // returns random item from array
   return this[this.length.random()];
 }
 
@@ -64,7 +65,7 @@ Object.prototype.randomKey = function() { // returns random key from dictionary
   return Object.keys(this).random();
 }
 
-Object.prototype.flatten = function() { // returns flattened array of all nested items in object
+Object.prototype.flatten = function() { // returns flattened array of all nested items in dictionary
   let array = [];
   let keys = Object.keys(this);
   for (i = 0; i < keys.length; i++) {
@@ -77,33 +78,26 @@ Object.prototype.flatten = function() { // returns flattened array of all nested
 class Card {
   constructor() {
     this.letter = ALPHABET.random();
-    this.list = this.simpleSelect();
+    this.list = this.select();
     console.log("New card.");
     this.publish();
   }
 
-  simpleSelect(n = NO_OF_CATEGORIES) {
-    let all = CATEGORIES.flatten();
+  select(n = NO_OF_CATEGORIES) {
+    let cats = CATEGORIES.slice(0);
+    switch (localization) {
+      case "all":
+        cats = cats.concat(LOCAL_CATEGORIES.flatten());
+        break;
+      case "none":
+        break;
+      default:
+        cats = cats.concat(LOCAL_CATEGORIES[localization]);
+        break;
+    }
     let list = [];
     for (let i = 0; i < n; i++) {
-      list.push(all.pluck());
-    }
-    return list;
-  }
-
-  select(n = NO_OF_CATEGORIES) {
-    let all = JSON.parse(JSON.stringify(CATEGORIES));
-    let list = [];
-    if (difficulty) {
-      let k = all.randomKey();
-      for (let i = 0; i < difficulty; i++) {
-        list.push(all[k].pluck());
-      }
-      delete all[k];
-    }
-    let flat = all.flatten();
-    for (let i = difficulty; i < n; i++) {
-      list.push(flat.pluck());
+      list.push(cats.pluck());
     }
     return list;
   }
@@ -209,12 +203,13 @@ class Notification {
   }
 }
 
-// FUNCTIONS ------------------------------------------------------------------
-// function generateCard() {
-//   new Card();
-//   t.reset();
-// }
+class Localization {
+  constructor() {
+    //
+  }
+}
 
+// FUNCTIONS ------------------------------------------------------------------
 function startNewRound() {
   new Card();
   t.reset();
@@ -229,6 +224,31 @@ function resetTimer() {
   t.reset();
 }
 
+function initializeLocalizations() {
+  let l = document.getElementById("localization");
+  let keys = Object.keys(LOCAL_CATEGORIES)
+  keys.push("World");
+  console.log(keys);
+  for (let i = 0; i < keys.length; i++) {
+    let option = document.createElement("OPTION");
+    option.value = keys[i];
+    option.innerHTML = keys[i];
+    l.appendChild(option);
+  }
+  l.value = "World";
+}
+
+function report() {
+  let generic = CATEGORIES.length;
+  let local = LOCAL_CATEGORIES.flatten().length;
+  console.log("Categories: " + generic + " generic, " + local + " local, " + (generic + local) + " total.");
+}
+
+function setLocalization() {
+  localization = document.getElementById("localization").value;
+  console.log("Localization: " + localization + ".");
+}
+
 function show(content) {
   if (note) {
     note.dismiss();
@@ -237,6 +257,8 @@ function show(content) {
 }
 
 // MAIN -----------------------------------------------------------------------
-console.log(CATEGORIES.flatten().length + " categories in use.");
+report();
+initializeLocalizations();
+setLocalization();
 t = new Timer();
 new Card();
