@@ -3,25 +3,28 @@
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-  <div id="card" onclick="startNewRound()">
-    <div id="letter"></div>
-    <div id="categories"></div>
+  <div id="main">
+    <div id="card" onclick="startNewRound()">
+      <div id="letter"></div>
+      <div id="categories"></div>
+    </div>
+    <div id="timer" onclick="toggleTimer()" ondblclick="resetTimer()"></div>
+    <audio id="audio">
+      <source src="audio.mp3" type="audio/mpeg">
+    </audio>
+    <div id="footer">
+      <select id="localization" onchange="setLocalization()">
+        <option value="" disabled="disabled">Localization:</option>
+        <option value="none">None</option>
+        <!-- <option value="all" selected>World</option> -->
+      </select>
+      <a onclick="show('rules')">Rules</a>
+      <a onclick="show('help')">Help</a>
+    </div>
+    <div id="credits"><a href="http://www.keiranking.com/" target="_blank">keiranking.com</a> &middot;
+    <a href="https://github.com/keiranking/Gary" target="_blank">GitHub</a> &middot; Gary</div>
+    <div id="notebar"></div>
   </div>
-  <div id="timer" onclick="toggleTimer()" ondblclick="resetTimer()"></div>
-  <audio id="audio">
-    <source src="audio.mp3" type="audio/mpeg">
-  </audio>
-  <div id="footer">
-    <select id="localization" onchange="setLocalization()">
-      <option value="" disabled="disabled">Localization:</option>
-      <option value="none">None</option>
-      <!-- <option value="all" selected>World</option> -->
-    </select>
-    <a onclick="show('rules')">Rules</a> &middot;
-    <a onclick="show('help')">Help</a>
-  </div>
-  <div id="credits"><a href="http://www.keiranking.com/" target="_blank">keiranking.com</a> &middot;
-  <a href="https://github.com/keiranking/Gary" target="_blank">GitHub</a> &middot; Gary</div>
   <div id="rules" class="hidden">
     <h3>Rules</h3>
     <p>Each round, players write answers that fit the categories, starting with the key letter, within the allotted time.</p>
@@ -33,7 +36,6 @@
     <p>Click the card to start a new round.</p>
     <p>Click the time to start or pause the clock.</p>
   </div>
-  <div id="notebar"></div>
   <script src="categories.js"></script>
   <script src="gary.js"></script>
 </body>

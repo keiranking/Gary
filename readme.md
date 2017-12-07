@@ -8,7 +8,7 @@ Gary is an alliterative word game for 2 or more players.
 * Go to [keiranking.com/gary](http://www.keiranking.com/gary/).
 * Start playing.
 
-## Rules
+### Rules
 * Each round, players write answers that fit the categories, starting with the key letter, within the allotted time.
 * Each unique answer is worth 1 point. Alliterative answers are worth 1 point per word (eg. Daffy Duck, 2 pts).
 * Answers can only be used in one category. Player with the most points after all rounds are completed wins.
@@ -20,7 +20,7 @@ To localize Gary for another country:
    ```
    'France': [],
    ```
-3. Add local categories as strings in that array.
+3. Add local categories as strings in the array.
    ```
    'France': [
      "French breads",
