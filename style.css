@@ -246,7 +246,6 @@ body {
   }
   #timer {
     position: relative;
-    /*width: auto;*/
     margin: 10px auto;
     left: 0;
   }
