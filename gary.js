@@ -15,7 +15,6 @@
 // GLOBAL CONSTANTS -----------------------------------------------------------
 const ROUND_DURATION = 180;
 const WARNING_TIME = 15;
-const RESET_DELAY = 3;
 const NO_OF_CATEGORIES = 12;
 const ALPHABET = "ABCDEFGHIJKLMNOPRSTW";
 
@@ -29,7 +28,7 @@ let note = null;
 let localization = null;
 
 // DATA TYPE FUNCTIONS --------------------------------------------------------
-Number.prototype.toTimeString = function() { // converts seconds to MM:SS string
+Number.prototype.toTimeString = function() { // convert seconds to MM:SS string
   let time = parseInt(this, 10);
   let m = Math.floor(time / 60);
   let ss = time - (m * 60);
@@ -37,30 +36,33 @@ Number.prototype.toTimeString = function() { // converts seconds to MM:SS string
   return m + ":" + ss;
 }
 
-Number.prototype.random = function() { // returns random number between 0 and the number (exclusive)
+Number.prototype.random = function() { // return random number between 0 and the number (exclusive)
   return Math.floor(Math.random() * this);
 }
 
-String.prototype.random = function() { // returns random character from string
+String.prototype.random = function() { // return random character from string
   return this[this.length.random()];
 }
 
-Array.prototype.pluck = function() { // returns random item, which is deleted from array
-  const index = this.length.random();
-  const selection = this[index];
-  this.splice(index, 1);
-  return selection;
+Array.prototype.pluck = function(n = 1) { // return random item, which is deleted from array
+  let list = [];
+  for (let i = 0; i < n; i++) {
+    const index = this.length.random();
+    list.push(this[index]);
+    this.splice(index, 1);
+  }
+  return list.length == 1 ? list[0] : list;
 }
 
-Array.prototype.random = function() { // returns random item from array
+Array.prototype.random = function() { // return random item from array
   return this[this.length.random()];
 }
 
-Object.prototype.randomKey = function() { // returns random key from dictionary
+Object.prototype.randomKey = function() { // return random key from dictionary
   return Object.keys(this).random();
 }
 
-Object.prototype.flatten = function() { // returns flattened array of all nested items in dictionary
+Object.prototype.flatten = function() { // return flattened array of all nested items in dictionary
   let array = [];
   let keys = Object.keys(this);
   for (i = 0; i < keys.length; i++) {
@@ -78,7 +80,7 @@ class Card {
     this.publish();
   }
 
-  select(n = NO_OF_CATEGORIES) {
+  select(n = NO_OF_CATEGORIES) { // populate categories
     let cats = CATEGORIES.slice(0);
     switch (localization) {
       case "all":
@@ -90,32 +92,25 @@ class Card {
         cats = cats.concat(LOCAL_CATEGORIES[localization]);
         break;
     }
-    let list = [];
-    for (let i = 0; i < n; i++) {
-      list.push(cats.pluck());
-    }
-    return list;
+    return cats.pluck(n);
   }
 
-  publish() {
+  publish() { // send Card contents to UI
     categories.innerHTML = "";
     let ol = document.createElement("OL");
     for (let i = 0; i < this.list.length; i++) {
       let li = document.createElement("LI");
       li.innerHTML = this.list[i];
       if (i == this.list.length - 1) {
-        li.classList.add("last");
+        li.classList.add("last"); // remove border from last category
       }
       ol.appendChild(li);
     }
     categories.appendChild(ol);
-    if (card.classList.contains("tilt-left")) {
-      card.classList.remove("tilt-left");
-      card.classList.add("tilt-right");
-    } else {
-      card.classList.remove("tilt-right");
-      card.classList.add("tilt-left");
-    }
+
+    card.classList.toggle("tilt-left");
+    card.classList.toggle("tilt-right");
+
     letter.innerHTML = this.letter;
   }
 }
@@ -193,7 +188,6 @@ class Notification {
 
   dismiss(seconds = 0) {
     let div = document.getElementById(this.id);
-    // seconds = (seconds === true) ? 10 : seconds;
     setTimeout(function() { div.remove(); }, seconds * 1000);
   }
 }
