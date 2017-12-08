@@ -32,6 +32,9 @@ To localize Gary for another country:
 4. Reload `index.html`.
 5. Select your new country from the localization menu.
 
+## Contributions
+Have a cool feature or more great categories? Submit an issue.
+
 ## License
 Licensed under [the Apache License, v2.0](http://www.apache.org/licenses/LICENSE-2.0) (the 'License').
 
