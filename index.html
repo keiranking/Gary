@@ -1,5 +1,15 @@
 <html>
 <head>
+  <meta charset="utf-8"/>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-675766-5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-675766-5');
+  </script>
+  <!-- End of analytics -->
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
@@ -16,7 +26,6 @@
       <select id="localization" onchange="setLocalization()">
         <option value="" disabled="disabled">Localization:</option>
         <option value="none">None</option>
-        <!-- <option value="all" selected>World</option> -->
       </select>
       <a onclick="show('rules')">Rules</a>
       <a onclick="show('help')">Help</a>

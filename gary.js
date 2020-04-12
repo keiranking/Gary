@@ -15,7 +15,7 @@
 // GLOBAL CONSTANTS -----------------------------------------------------------
 const ROUND_DURATION = 180;
 const WARNING_TIME = 15;
-const NO_OF_CATEGORIES = 12;
+const NO_OF_CATEGORIES_PER_ROUND = 12;
 const ALPHABET = "ABCDEFGHIJKLMNOPRSTW";
 
 // GLOBAL DOM VARIABLES -------------------------------------------------------
@@ -73,26 +73,11 @@ Object.prototype.flatten = function() { // return flattened array of all nested 
 
 // CLASSES --------------------------------------------------------------------
 class Card {
-  constructor() {
-    this.letter = ALPHABET.random();
-    this.list = this.select();
+  constructor(cats = [], letter = ALPHABET.random()) {
+    this.letter = letter;
+    this.list = cats;
     console.log("New card.");
     this.publish();
-  }
-
-  select(n = NO_OF_CATEGORIES) { // populate categories
-    let cats = CATEGORIES.slice(0);
-    switch (localization) {
-      case "all":
-        cats = cats.concat(LOCAL_CATEGORIES.flatten());
-        break;
-      case "none":
-        break;
-      default:
-        cats = cats.concat(LOCAL_CATEGORIES[localization]);
-        break;
-    }
-    return cats.pluck(n);
   }
 
   publish() { // send Card contents to UI
@@ -120,6 +105,7 @@ class Timer {
     this.secs = seconds;
     this.id = null;
     this.publish();
+    console.log("New timer.");
   }
 
   toggle() {
@@ -192,19 +178,80 @@ class Notification {
   }
 }
 
+class Game {
+  constructor() {
+    this.localization = localization;
+    this.availableCategories = this.repopulateCategories();
+    this.availableAlphabet = this.repopulateAlphabet();
+    console.log("New game with " + this.availableCategories.length + " categories.");
+    this.card = new Card(this.selectCategories(), this.selectLetter());
+    this.timer = new Timer();
+  }
+
+  repopulateCategories() {
+    let cats = CATEGORIES.slice(0);
+    switch (this.localization) {
+      case "World":
+        cats = cats.concat(LOCAL_CATEGORIES.flatten());
+        console.log("Categories for all locales are available.")
+        break;
+      case "none":
+        break;
+      default:
+        cats = cats.concat(LOCAL_CATEGORIES[this.localization]);
+        console.log("Only " + this.localization + " categories are available.")
+        break;
+    }
+    return cats;
+  }
+
+  repopulateAlphabet() {
+    return ALPHABET.slice(0).split("");
+  }
+
+  selectCategories(n = NO_OF_CATEGORIES_PER_ROUND) {
+    return this.availableCategories.pluck(n);
+  }
+
+  selectLetter() {
+    return this.availableAlphabet.pluck();
+  }
+
+  startNewRound() {
+    if (localization != this.localization) {
+      this.localization = localization;
+      this.availableCategories = this.repopulateCategories();
+      // console.log("Localization changed. Categories repopulated.");
+    }
+
+    if (this.availableCategories.length < NO_OF_CATEGORIES_PER_ROUND) {
+      this.availableCategories = this.repopulateCategories();
+      console.log("Categories repopulated.");
+    }
+
+    if (!this.availableAlphabet.length) {
+      this.availableAlphabet = this.repopulateAlphabet();
+      console.log("Alphabet repopulated.");
+    }
+
+    this.card = new Card(this.selectCategories(), this.selectLetter());
+    console.log(this.availableCategories.length + " categories remain unplayed.");
+    this.timer.reset();
+    this.timer.toggle();
+  }
+}
+
 // FUNCTIONS ------------------------------------------------------------------
 function startNewRound() {
-  new Card();
-  t.reset();
-  t.toggle();
+  game.startNewRound();
 }
 
 function toggleTimer() {
-  t.toggle();
+  game.timer.toggle();
 }
 
 function resetTimer() {
-  t.reset();
+  game.timer.reset();
 }
 
 function initializeLocalizations() {
@@ -242,5 +289,4 @@ function show(content) {
 report();
 initializeLocalizations();
 setLocalization();
-let t = new Timer();
-new Card();
+let game = new Game();
