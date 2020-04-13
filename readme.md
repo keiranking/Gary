@@ -15,12 +15,8 @@ Gary is an alliterative word game for 2 or more players.
 
 ## Localization
 To localize Gary for another country:
-1. Open `categories.js`.
-2. Add a country as a new key in the `LOCAL_CATEGORIES` dictionary, with an empty array as the value.
-   ```
-   'France': [],
-   ```
-3. Add local categories as strings in the array.
+1. Fork and clone the repo.
+1. In `categories.js`, add a new country key in the `LOCAL_CATEGORIES` dictionary and supply categories as strings in an array.
    ```
    'France': [
      "French breads",
@@ -29,8 +25,9 @@ To localize Gary for another country:
      "Wineries"
    ],
    ```
-4. Reload `index.html`.
-5. Select your new country from the localization menu.
+1. Run the app locally. For example, if you run `python3 -m http.server`,
+   navigate to `localhost:8000`.
+1. Select your new country from the localization menu.
 
 ## Contributions
 Have a cool feature or more great categories? Submit an issue.
