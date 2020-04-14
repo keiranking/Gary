@@ -86,9 +86,6 @@ class Card {
     for (let i = 0; i < this.list.length; i++) {
       let li = document.createElement("LI");
       li.innerHTML = this.list[i];
-      if (i == this.list.length - 1) {
-        li.classList.add("last"); // remove border from last category
-      }
       ol.appendChild(li);
     }
     categories.appendChild(ol);
