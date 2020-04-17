@@ -183,9 +183,9 @@ const CATEGORIES = [
   "Places in Europe",
   "Places that fly flags",
   "Places to hang out",
+  "Places people have sex",
   "Places you can be naked",
   "Places you can get trapped",
-  "Places you can have sex",
   "Places you must wear a hat",
   "Places you're not allowed to go",
   "Plants",
@@ -292,6 +292,7 @@ const CATEGORIES = [
   "Things on the moon",
   "Things on the ocean floor",
   "Things sold behind the counter",
+  "Things that appreciate",
   "Things that are black",
   "Things that are blue",
   "Things that are cold",
@@ -310,6 +311,7 @@ const CATEGORIES = [
   "Things that cost about $10",
   "Things that cost about $100",
   "Things that cost about $1,000",
+  "Things that depreciate",
   "Things that get you fired",
   "Things that go up and down",
   "Things that grow",
@@ -323,8 +325,6 @@ const CATEGORIES = [
   "Things that shouldn't get wet",
   "Things that spin",
   "Things that use a remote",
-  "Things that usually appreciate",
-  "Things that usually depreciate",
   "Things there's only one of",
   "Things to do at a party",
   "Things to do on a date",
@@ -428,8 +428,7 @@ const CATEGORIES = [
   "Words with exactly 2 vowels",
   "Words with exactly 3 vowels",
   "Words with multiple meanings",
-  "World leaders/politicians",
-  "World records"
+  "World leaders/politicians"
 ];
 
 const LOCAL_CATEGORIES = {
